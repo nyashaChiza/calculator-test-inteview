@@ -1,7 +1,7 @@
 import pytest
 from .. import Calculator
 
-# Creating an instance of the Calculator class for testing....
+# Creating an instance of the Calculator class for testing..
 calculator = Calculator()
 
 # Test cases for the Calculator class
@@ -29,36 +29,39 @@ def test_multiply():
 def test_divide():
     assert calculator.divide(6, 2) == 3.0
     assert calculator.divide(5, 2) == 2.5
-    assert calculator.divide(7, 3) == pytest.approx(2.33333, abs=0.00001)  # Floating-point precision
+    # Floating-point precision
+    assert calculator.divide(7, 3) == pytest.approx(2.33333, abs=0.00001)  
+    # Division by zero should raise an error
     with pytest.raises(ValueError):
-        calculator.divide(1, 0)  # Division by zero should raise an error
+        calculator.divide(1, 0)  
     with pytest.raises(ValueError):
-        calculator.divide(0, 0)  # Division by zero should raise an error
+        calculator.divide(0, 0)  
     with pytest.raises(ValueError):
-        calculator.divide(10, 0.0)  # Division by zero should raise an error
+        calculator.divide(10, 0.0) 
 
-# Additional tests for edge cases and potential error conditions
+    # edge cases and potential error conditions
+    # Division by zero should raise an error
 def test_divide_by_zero_error():
     with pytest.raises(ValueError):
-        calculator.divide(1, 0)  # Division by zero should raise an error
-
+        calculator.divide(1, 0)  
+    # Invalid input types should raise a TypeError
 def test_invalid_input_types():
     with pytest.raises(TypeError):
-        calculator.add("5", 2)  # Invalid input types should raise a TypeError
+        calculator.add("5", 2)  #
     with pytest.raises(TypeError):
-        calculator.subtract(3, "2")  # Invalid input types should raise a TypeError
+        calculator.subtract(3, "2") 
     with pytest.raises(TypeError):
-        calculator.multiply("3", 2)  # Invalid input types should raise a TypeError
+        calculator.multiply("3", 2)  
     with pytest.raises(TypeError):
-        calculator.divide(6, "2")  # Invalid input types should raise a TypeError
+        calculator.divide(6, "2")  
 
 def test_large_numbers():
-    # Test multiplication with large numbers
+    # multiplication with large numbers
     assert calculator.multiply(10**10, 10**10) == 10**20
-    # Test addition with large numbers
+    # addition with large numbers
     assert calculator.add(10**20, -10**20) == 0
 
 def test_decimal_precision():
-    # Test division with decimal precision
+    # division with decimal precision
     assert calculator.divide(1, 3) == pytest.approx(0.33333, abs=0.00001)
     assert calculator.divide(2, 3) == pytest.approx(0.66666, abs=0.00001)
